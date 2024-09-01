@@ -1,8 +1,15 @@
 import { ModeToggle } from "@/components/mode-toggle";
 import Todo from "./_components/todo";
 import AddTodo from "./_components/add-todo";
+import { getData } from "@/actions/todoActions";
+import Todos from "./_components/todos";
 
-export default function Home() {
+
+export default async function Home() {
+  const data = await getData();
+
+  console.log("data-", data);
+
   return (
     <main className="flex min-h-screen flex-col gap-4 ">
       <nav className="border-b shadow ">
@@ -15,15 +22,7 @@ export default function Home() {
       {/*  */}
       <div className=" px-2 w-full max-w-[600px]  mx-auto  flex flex-col gap-6">
         <AddTodo />
-
-        {/*Todo items container  */}
-        {/* parent div */}
-        <div className="flex flex-col gap-2">
-          <Todo />
-          <Todo />
-          <Todo />
-          <Todo />
-        </div>
+        <Todos data={data} />
       </div>
     </main>
   );
